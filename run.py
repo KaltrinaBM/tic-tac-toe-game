@@ -1,3 +1,4 @@
+# Show instructions on how to play the game
 def game_inst():
 
     print("* The game is played on a grid that's "
@@ -12,7 +13,7 @@ def game_inst():
 
 game_inst()
 
-
+# Get the player name only letters accepted
 def player_name():
 
     while True:
@@ -27,3 +28,22 @@ def player_name():
 
 
 player_name()
+
+# Take player's symbol choice
+def select_option():
+    player_choice = input(f"{player_name.capitalize()}, please select X or O:")
+    comp_choice = ""
+    while True:
+        if player_choice.upper() == "X":
+            comp_choice == "O"
+            print("Your opponent is O")
+            return player_choice.upper(), comp_choice
+        elif player_choice.upper() == "O":
+            comp_choice == "X"
+            print("Your opponent is X")
+            return player_choice.upper(), comp_choice
+        else:
+            player_choice = input(f"{player_name.capitalize()}, please select X or O:")
+
+
+select_option()
