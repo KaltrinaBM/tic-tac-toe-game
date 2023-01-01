@@ -1,3 +1,11 @@
+'''importing modules'''
+import sys  # to access parameters and functions
+import random  # for computer moves
+
+board = {1: ' ', 2: ' ', 3: ' ',
+         4: ' ', 5: ' ', 6: ' ',
+         7: ' ', 8: ' ', 9: ' '}
+
 # Show instructions on how to play the game
 def game_inst():
 
@@ -29,21 +37,18 @@ def player_name():
 
 player_name()
 
-# Take player's symbol choice
-def select_option():
-    player_choice = input(f"{player_name.capitalize()}, please select X or O:")
-    comp_choice = ""
-    while True:
-        if player_choice.upper() == "X":
-            comp_choice == "O"
-            print("Your opponent is O")
-            return player_choice.upper(), comp_choice
-        elif player_choice.upper() == "O":
-            comp_choice == "X"
-            print("Your opponent is X")
-            return player_choice.upper(), comp_choice
-        else:
-            player_choice = input(f"{player_name.capitalize()}, please select X or O:")
+def select_symbol():
+    # Ask the player if player wants to chose X or O
+    symbol = ''
+    while not (symbol == 'X' or symbol == 'O'):
+        print("Please select X or O:")
+        symbol = input().upper()
+
+    if symbol == 'X':
+        return ['X', 'O']
+    else:
+        return ['O', 'X']
 
 
-select_option()
+select_symbol()
+
