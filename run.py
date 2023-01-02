@@ -5,7 +5,8 @@ import sys
 # Variables used through the functions below which we need to access using global statement
 
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-
+score_x = 0
+score_o = 0
 
 # Displaying the instructions on how o play the game
 
@@ -68,6 +69,7 @@ def display_board(board):
     print(" " + board[7] + " | " + board[8] + " | " + board[9] + "  " +
           " "*10 + " " + "7" + " | " + "8" + " | " + "9" + "  ")
     print("\n")
+    print(f'Your Score: {score_x:>5}\n')
+    print(f'Computer Score:{score_o:>5}\n')
 
 print(display_board(board))
-
