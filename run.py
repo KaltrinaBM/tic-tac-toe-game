@@ -132,6 +132,61 @@ def increment_score():
 
 
 
+# Possible winning combination, horizontally, vertically and diagonally
+
+def vertical_check(board):
+    '''
+    Checking if there are 3 same symbols vertically
+    '''
+    global if_winner
+    if board[1] == board[4] == board[7] and board[1] != ' ':
+        if_winner = board[1]
+        return True
+    elif board[2] == board[5] == board[8] and board[8] != ' ':
+        if_winner = board[2]
+        return True
+    elif board[3] == board[6] == board[9] and board[9] != ' ':
+        if_winner = board[3]
+        return True
+
+def horiz_check(board):
+    '''
+    Checking if there are 3 same symbols horizontally
+    '''
+    global if_winner
+    if board[1] == board[2] == board[3] and board[1] != ' ':
+        if_winner = board[1]
+        return True
+    elif board[4] == board[5] == board[6] and board[4] != ' ':
+        if_winner = board[4]
+        return True
+    elif board[7] == board[8] == board[9] and board[9] != ' ':
+        if_winner = board[7]
+        return True
+
+def diag_check(board):
+    '''
+    Checking if there are 3 same symbols diagonally
+    '''
+    global if_winner
+    if board[1] == board[5] == board[9] and board[9] != ' ':
+        if_winner = board[1]
+        return True
+    elif board[3] == board[5] == board[7] and board[7] != ' ':
+        if_winner = board[3]
+        return True
+
+
+def tie_info(board):
+    '''
+    Checking for a draw, and infomring the player if that is a win or draw
+    '''
+    if board.count(' ') > 1:
+        return False
+    else:
+        return True
+
+
 # Switching between computer 'O' and player 'X'
 def switch_play():
     '''
@@ -184,7 +239,8 @@ def play_game():
             except ValueError:
                 print("Wrong input. Please enter a valid number:\n")
 
-
+ 
+        tie_info(board)
         switch_play()
         computer_turn(board)
 
