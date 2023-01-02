@@ -4,12 +4,12 @@ import sys
 
 # Variables used through the functions below which we need to access using global statement
 
-symbol_selected = 'X'
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-if_winner = None
-player_name = None
 score_x = 0
 score_o = 0
+symbol_selected = 'X'
+if_winner = None
+player_name = None
 
 # Displaying the instructions on how o play the game
 
@@ -117,3 +117,73 @@ def play_quit():
         else:
             print("Incorrect input. Please select 'Y' or 'Q'")
 
+
+def increment_score():
+    '''
+    Add 1 score point if there is a win for each symbol
+    '''
+    if if_winner == 'X':
+        global score_x
+        score_x += 1
+    elif if_winner == 'O':
+        global score_o
+        score_o += 1
+    else:
+        return None
+
+# Switching between computer 'O' and player 'X'
+def switch_play():
+    '''
+    Switches the turn after each input from the player and computer
+    '''
+    global symbol_selected
+    if symbol_selected == 'X':
+        symbol_selected = 'O'
+
+    else:
+        symbol_selected = 'X'
+
+
+def computer_turn(board):
+    '''
+    Computer selects random numbers from 1-9, if there are available spots
+    '''
+    while symbol_selected == 'O':
+        comp_selected = random.randint(1, 9)
+        if board[comp_selected] == ' ':
+            board[comp_selected] = 'O'
+            switch_play()
+
+
+def play_game():
+    '''
+    Game starts by taking player's input and calling other methods,
+     to switch the player and check if it is a win or tie.
+    '''
+    while True:
+        display_board(board)
+
+        while True:
+
+            try:
+
+                player_inp = int(input('Type a number between 1-9! :\n'))
+
+                if player_inp in range(1, 10):
+                    if board[player_inp] == ' ':
+                        board[player_inp] = symbol_selected
+                        break
+                    else:
+                        print(
+                            f"Number: {player_inp}, is already taken. "
+                            "Type another number.")
+                else:
+                    print('Invalid selection. Type a number between 1-9!\n')
+
+            except ValueError:
+                print("Wrong input. Please enter a valid number:\n")
+
+        switch_play()
+        computer_turn(board)
+
+play_game()
