@@ -41,10 +41,10 @@ def player_name():
 
         if player_name.isalpha():
             print(f"\nNice to meet you {player_name.capitalize()}.\n"
-            "\nYou are playing as 'X' and I am (computer) playing as 'O'\n")
+            "\nYou are playing as 'X' and I (computer) am playing as 'O'\n")
             break
         else:
-            print("Incorrect typing. Enter letters only!")
+            print("Incorrect typing. Letters only!")
 
 player_name()
 
@@ -75,14 +75,14 @@ def display_board(board):
     '''
     print('\n')
     print(" Game board " + " "*9 + "Reference board\n")
-    print(" " + board[1] + " | " + board[2] + " | " + board[3] + "  " +
-          " "*10 + " " + "1" + " | " + "2" + " | " + "3" + "  ")
+    print(" " + board[7] + " | " + board[8] + " | " + board[9] + "  " +
+          " "*10 + " " + "7" + " | " + "8" + " | " + "9" + "  ")
     print("---|---|---" + " "*11 + "---|---|---")
     print(" " + board[4] + " | " + board[5] + " | " + board[6] + "  " +
           " "*10 + " " + "4" + " | " + "5" + " | " + "6" + "  ")
     print("---|---|---" + " "*11 + "---|---|---")
-    print(" " + board[7] + " | " + board[8] + " | " + board[9] + "  " +
-          " "*10 + " " + "7" + " | " + "8" + " | " + "9" + "  ")
+    print(" " + board[1] + " | " + board[2] + " | " + board[3] + "  " +
+          " "*10 + " " + "1" + " | " + "2" + " | " + "3" + "  ")
     print("\n")
     print(f'Your Score: {score_x:>5}\n')
     print(f'Computer Score:{score_o:>5}\n')
@@ -117,7 +117,6 @@ def play_quit():
         else:
             print("Incorrect input. Please select 'Y' or 'Q'")
 
-
 def increment_score():
     '''
     Add 1 score point if there is a win for each symbol
@@ -130,6 +129,8 @@ def increment_score():
         score_o += 1
     else:
         return None
+
+
 
 # Switching between computer 'O' and player 'X'
 def switch_play():
@@ -183,7 +184,9 @@ def play_game():
             except ValueError:
                 print("Wrong input. Please enter a valid number:\n")
 
+
         switch_play()
         computer_turn(board)
+
 
 play_game()
