@@ -1,19 +1,18 @@
 '''importing modules'''
 import random
-import sys
-
-# Variables used through the functions below which we need to access using global statement
 
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 score_x = 0
 score_o = 0
 symbol_selected = 'X'
 if_winner = None
-player_name = None
+name_input = None
 
-# Displaying the instructions on how o play the game
 
 def game_inst():
+    """
+    Displaying the instructions on how o play the game
+    """
     print("\n")
     print("*** Welcome to TIC TAC TOE! ***")
     print("________________________________\n")
@@ -27,53 +26,60 @@ def game_inst():
     print(" -- Once the game is finished, you have the option to play again,"
           "or quit the game, and the scores will be displayed when playing.\n")
 
+
 game_inst()
 
 
 def player_name():
-    '''
+    """
     Request player's name so we can address by name throught the game
-    '''
-    
-    while True:
-        global player_name
-        player_name = input("Let's meet. Please enter your name: \n")
+    """
 
-        if player_name.isalpha():
-            print(f"\nNice to meet you {player_name.capitalize()}.\n"
-            "\nYou are playing as 'X' and I (computer) am playing as 'O'\n")
+    while True:
+        global name_input
+        name_input = input("Let's meet. Please enter your name: \n")
+
+        if name_input.isalpha():
+            print(f"\nNice to meet you {name_input.capitalize()}.\n"
+                  "\nYou are playing as 'X',"
+                  "and I (computer) am playing as 'O'\n")
             break
         else:
             print("Incorrect typing. Letters only!")
 
+
 player_name()
 
+
 def new_game():
-    '''
-    Request from the user to type Y/N to start or quit thegame, 
+    """
+    Request from the user to type Y/N to start or quit thegame,
     so the board is displayed or the game is ended.
-    '''
+    """
     while True:
         new_game_input = input("Do you want to play? (Y/N)\n")
-        if new_game_input.lower() == 'y':             
-            print('Get ready...')
+        if new_game_input.lower() == 'y':
+            print("Get ready...")
             break
         elif new_game_input.lower() == 'n':
             print("Sorry to see you go, and hope that we will meet again.")
             quit()
         else:
-            print(f"{new_game_input} is incorrect value. Please type 'Y' for Yes or 'N' for No. Do you want to play?")
+            print(f"{new_game_input} is incorrect value."
+                  "Please type 'Y' for Yes or 'N' for No."
+                  "Do you want to play?")
 
 
 new_game()
 
 
 def display_board(board):
-    '''
-    Show board game to play and a reference game to show with which numbers the player has to play. 
+    """
+    Show board game to play and a reference board
+    to show the same order of NumLock numbers to play.
     Also, displaying the scores each time the board is displayed.
-    '''
-    print('\n')
+    """
+    print("\n")
     print(" Game board " + " "*9 + "Reference board\n")
     print(" " + board[7] + " | " + board[8] + " | " + board[9] + "  " +
           " "*10 + " " + "7" + " | " + "8" + " | " + "9" + "  ")
@@ -84,32 +90,35 @@ def display_board(board):
     print(" " + board[1] + " | " + board[2] + " | " + board[3] + "  " +
           " "*10 + " " + "1" + " | " + "2" + " | " + "3" + "  ")
     print("\n")
-    print(f'Your Score: {score_x:>5}\n')
-    print(f'Computer Score:{score_o:>5}\n')
+    print(f"Your Score: {score_x:>5}\n")
+    print(f"Computer Score:{score_o:>5}\n")
+
 
 def clear_board():
-    '''
+    """
     Clear the board for the next game.
-    '''
+    """
     board.clear()
     board.extend([' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '])
 
+
 def play_quit():
-    '''
+    """
     Request an input from the player if player wants to play or quit the game.
-    '''
+    """
     print("*** Game Over*** \n")
 
     print("Enter 'Y' to play again.")
-    print('Enter "Q" to quit the game.\n')
+    print("Enter 'Q' to quit the game.\n")
     while True:
-        global player_name
+        global name_input
         play_quit = input().strip()
         if play_quit.lower() == 'q':
-            print(f'It was a pleasure playing with you {player_name.capitalize()}.')
+            print("It was a pleasure playing with you "
+                  f"{name_input.capitalize()}.")
             quit()
         elif play_quit.lower() == 'y':
-            print(f'Welcome back {player_name.capitalize()}')
+            print(f"Welcome back {name_input.capitalize()}")
             new_game()
             clear_board()
             play_game()
@@ -117,10 +126,11 @@ def play_quit():
         else:
             print("Incorrect input. Please select 'Y' or 'Q'")
 
+
 def increment_score():
-    '''
+    """
     Add 1 score point if there is a win for each symbol
-    '''
+    """
     if if_winner == 'X':
         global score_x
         score_x += 1
@@ -130,19 +140,19 @@ def increment_score():
     else:
         return None
 
+
 def find_winner(board):
-    '''
-    This method checks the combinations as stated above, 
-    to find if there is a win or a tie, 
+    """
+    Possible winning combination, horizontally, vertically and diagonally,
+    to find if there is a win or a tie,
     and show the results and update the scores accordingly.
-    
-    '''
+    """
     if vertical_check(board) or horiz_check(board) or diag_check(board):
         increment_score()
         display_board(board)
 
         if if_winner == 'X':
-            print(f"Congrats {player_name.capitalize()}, you won!\n")
+            print(f"Congrats {name_input.capitalize()}, you won!\n")
         elif if_winner == 'O':
             print("Computer won!\n")
 
@@ -155,12 +165,11 @@ def find_winner(board):
     else:
         return None
 
-# Possible winning combination, horizontally, vertically and diagonally
 
 def vertical_check(board):
-    '''
-    Checking if there are 3 same symbols vertically
-    '''
+    """
+    Checking if there are 3 same symbols vertically.
+    """
     global if_winner
     if board[1] == board[4] == board[7] and board[1] != ' ':
         if_winner = board[1]
@@ -172,10 +181,11 @@ def vertical_check(board):
         if_winner = board[3]
         return True
 
+
 def horiz_check(board):
-    '''
+    """
     Checking if there are 3 same symbols horizontally
-    '''
+    """
     global if_winner
     if board[1] == board[2] == board[3] and board[1] != ' ':
         if_winner = board[1]
@@ -187,10 +197,11 @@ def horiz_check(board):
         if_winner = board[7]
         return True
 
+
 def diag_check(board):
-    '''
+    """
     Checking if there are 3 same symbols diagonally
-    '''
+    """
     global if_winner
     if board[1] == board[5] == board[9] and board[9] != ' ':
         if_winner = board[1]
@@ -201,20 +212,20 @@ def diag_check(board):
 
 
 def tie_info(board):
-    '''
+    """
     Checking for a draw, and infomring the player if that is a win or draw
-    '''
+    """
     if board.count(' ') > 1:
         return False
     else:
         return True
 
 
-# Switching between computer 'O' and player 'X'
 def switch_play():
-    '''
-    Switches the turn after each input from the player and computer
-    '''
+    """
+    Switches the turn after each input from the player and computer.
+    Switching between computer 'O' and player 'X'
+    """
     global symbol_selected
     if symbol_selected == 'X':
         symbol_selected = 'O'
@@ -224,9 +235,9 @@ def switch_play():
 
 
 def computer_turn(board):
-    '''
+    """
     Computer selects random numbers from 1-9, if there are available spots
-    '''
+    """
     while symbol_selected == 'O':
         comp_selected = random.randint(1, 9)
         if board[comp_selected] == ' ':
@@ -235,10 +246,10 @@ def computer_turn(board):
 
 
 def play_game():
-    '''
+    """
     Game starts by taking player's input and calling other methods,
      to switch the player and check if it is a win or tie.
-    '''
+    """
     while True:
         display_board(board)
 
@@ -246,7 +257,7 @@ def play_game():
 
             try:
 
-                player_inp = int(input('Type a number between 1-9! :\n'))
+                player_inp = int(input("Type a number between 1-9! :\n"))
 
                 if player_inp in range(1, 10):
                     if board[player_inp] == ' ':
@@ -257,7 +268,7 @@ def play_game():
                             f"Number: {player_inp}, is already taken. "
                             "Type another number.")
                 else:
-                    print('Invalid selection. Type a number between 1-9!\n')
+                    print("Invalid selection. Type a number between 1-9!\n")
 
             except ValueError:
                 print("Wrong input. Please enter a valid number:\n")
