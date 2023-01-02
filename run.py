@@ -130,7 +130,30 @@ def increment_score():
     else:
         return None
 
+def find_winner(board):
+    '''
+    This method checks the combinations as stated above, 
+    to find if there is a win or a tie, 
+    and show the results and update the scores accordingly.
+    
+    '''
+    if vertical_check(board) or horiz_check(board) or diag_check(board):
+        increment_score()
+        display_board(board)
 
+        if if_winner == 'X':
+            print(f"Congrats {player_name.capitalize()}, you won!\n")
+        elif if_winner == 'O':
+            print("Computer won!\n")
+
+        play_quit()
+
+    elif tie_info(board):
+        display_board(board)
+        print("It's a Tie!\n")
+        play_quit()
+    else:
+        return None
 
 # Possible winning combination, horizontally, vertically and diagonally
 
@@ -239,7 +262,7 @@ def play_game():
             except ValueError:
                 print("Wrong input. Please enter a valid number:\n")
 
- 
+        find_winner(board)
         tie_info(board)
         switch_play()
         computer_turn(board)
