@@ -43,6 +43,7 @@ Python
 ## Features
 
 -   Responsive on all device sizes
+![Responsive](/images/responsivegame.PNG)
 
 ### Existing Features
 
