@@ -62,7 +62,7 @@ def new_game():
             print("Get ready...")
             break
         elif new_game_input.lower() == 'n':
-            print("Sorry to see you go, and hope that we will meet again.")
+            print("Sorry to see you go, and hope that we will meet again.\n")
             quit()
         else:
             print(f"{new_game_input} is incorrect value."
@@ -115,7 +115,7 @@ def play_quit():
         play_quit = input().strip()
         if play_quit.lower() == 'q':
             print("It was a pleasure playing with you "
-                  f"{name_input.capitalize()}.")
+                  f"{name_input.capitalize()}.\n")
             quit()
         elif play_quit.lower() == 'y':
             print(f"Welcome back {name_input.capitalize()}")
