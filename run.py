@@ -1,4 +1,3 @@
-'''importing modules'''
 import random
 
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
@@ -6,7 +5,7 @@ score_x = 0
 score_o = 0
 symbol_selected = 'X'
 if_winner = None
-name_input = None
+name_inp = None
 
 
 def game_inst():
@@ -36,11 +35,11 @@ def player_name():
     """
 
     while True:
-        global name_input
-        name_input = input("Let's meet. Please enter your name: \n")
+        global name_inp
+        name_inp = input("Let's meet. Please enter your name: \n")
 
-        if name_input.isalpha():
-            print(f"\nNice to meet you {name_input.capitalize()}.\n"
+        if name_inp.isalpha():
+            print(f"\nNice to meet you {name_inp.capitalize()}.\n"
                   "\nYou are playing as 'X',"
                   "and I (computer) am playing as 'O'\n")
             break
@@ -57,15 +56,15 @@ def new_game():
     so the board is displayed or the game is ended.
     """
     while True:
-        new_game_input = input("Do you want to play? (Y/N)\n")
-        if new_game_input.lower() == 'y':
+        new_game_inp = input("Do you want to play? (Y/N)\n")
+        if new_game_inp.lower() == 'y':
             print("Get ready...")
             break
-        elif new_game_input.lower() == 'n':
+        elif new_game_inp.lower() == 'n':
             print("Sorry to see you go, and hope that we will meet again.\n")
             quit()
         else:
-            print(f"{new_game_input} is incorrect value."
+            print(f"{new_game_inp} is incorrect value."
                   "Please type 'Y' for Yes or 'N' for No."
                   "Do you want to play?")
 
@@ -111,14 +110,14 @@ def play_quit():
     print("Enter 'Y' to play again.")
     print("Enter 'Q' to quit the game.\n")
     while True:
-        global name_input
+        global name_inp
         play_quit = input().strip()
         if play_quit.lower() == 'q':
             print("It was a pleasure playing with you "
-                  f"{name_input.capitalize()}.\n")
+                  f"{name_inp.capitalize()}.\n")
             quit()
         elif play_quit.lower() == 'y':
-            print(f"Welcome back {name_input.capitalize()}")
+            print(f"Welcome back {name_inp.capitalize()}")
             new_game()
             clear_board()
             play_game()
@@ -152,7 +151,7 @@ def find_winner(board):
         display_board(board)
 
         if if_winner == 'X':
-            print(f"Congrats {name_input.capitalize()}, you won!\n")
+            print(f"Congrats {name_inp.capitalize()}, you won!\n")
         elif if_winner == 'O':
             print("Computer won!\n")
 
